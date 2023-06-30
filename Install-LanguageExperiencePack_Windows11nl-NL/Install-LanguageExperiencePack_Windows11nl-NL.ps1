@@ -139,7 +139,7 @@ Set-Culture -CultureInfo $language
 Set-WinHomeLocation -GeoId $geoId
 
 # Copy User Internaltional Settings from current user to System, including Welcome screen and new user.
-"Copy UserInternationalSettingsToSystem "
+"Copy UserInternationalSettingsToSystem"
 Copy-UserInternationalSettingsToSystem -WelcomeScreen $True -NewUser $True
 
 # We have to switch the language for the current user session. The powershell cmdlets must be run in the current logged on user context.
@@ -180,7 +180,6 @@ Start-Sleep 10
 # Trigger store updates, there might be new app versions due to the language change.
 "Trigger MS Store updates for app updates"
 Get-CimInstance -Namespace "root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName "UpdateScanMethod"
-
 
 # Add registry key for MECM detection.
 "Add registry key for MECM detection"
