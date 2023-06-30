@@ -50,32 +50,23 @@ $userConfigScriptPath = $(Join-Path -Path $scriptFolderPath -ChildPath "UserConf
 # To not encode. I do not have to decode/encode all the time for modifications.
 $userConfigScript = @"
 `$language = "$language"
-
 Start-Transcript -Path `$env:TEMP"\LXP-UserSession-Config-$language.log" | Out-Null
-
 `$geoId = "$geoId"
-
 # Important for regional change like date and time...
 "`Set-WinUILanguageOverride = $language`"
 Set-WinUILanguageOverride -Language `"$language"
-
 Set-WinUserLanguageList -LanguageList `"$language" -Force
-
 `$OldList` = Get-WinUserLanguageList
 `$UserLanguageList = New-WinUserLanguageList -Language `"$language"
 `$UserLanguageList += `$OldList | Where-Object { `$_.LanguageTag -ne `"$language" }
 "Setting new user language list:"
 `$UserLanguageList | Select-Object LanguageTag
-
 "Set-WinUserLanguageList -LanguageList ..."
 Set-WinUserLanguageList -LanguageList `$UserLanguageList -Force
-
 "`Set-Culture = $language`"
 Set-Culture -CultureInfo `"$language"
-
 "`Set-WinHomeLocation = $geoId`"
 Set-WinHomeLocation -GeoId `"$geoId"
-
 Stop-Transcript -Verbose
 "@
 
